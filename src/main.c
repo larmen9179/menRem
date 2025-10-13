@@ -6,17 +6,20 @@
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
 
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+
 /* This function runs once at startup. */
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
-    SDL_SetAppMetadata("Example Renderer Clear", "1.0", "com.example.renderer-clear");
+    SDL_SetAppMetadata("Menhir2", "0.1", "com.example.menhir2");
 
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
 
-    if (!SDL_CreateWindowAndRenderer("examples/renderer/clear", 640, 480, 0, &window, &renderer)) {
+    if (!SDL_CreateWindowAndRenderer("Menhir2", SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer)) {
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
@@ -30,6 +33,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
     if (event->type == SDL_EVENT_QUIT) {
         return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
     }
+    
     return SDL_APP_CONTINUE;  /* carry on with the program! */
 }
 
@@ -50,7 +54,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     SDL_RenderPresent(renderer);
 
     return SDL_APP_CONTINUE;  /* carry on with the program! */
-}
+}  
 
 /* This function runs once at shutdown. */
 void SDL_AppQuit(void *appstate, SDL_AppResult result)
